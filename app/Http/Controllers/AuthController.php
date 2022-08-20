@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Location;
+use App\Models\SettlementType;
 
 class AuthController extends Controller
 {
@@ -85,6 +86,7 @@ class AuthController extends Controller
 
 
     public function codes($code){
+
         $code = Location::where('zip_code', $code)->first();
         $data =[
             "zip_code"=> $code["zip_code"],
@@ -100,7 +102,7 @@ class AuthController extends Controller
                 "name"=> $code->settlements["name"],
                 "zone_type"=> $code->settlements["zone_type"],
                 "settlement_type"=>[
-                    "name"=>"Pueblo"
+                    "name"=>$code->settlements['zone_type'],
                 ]
 
             ]]

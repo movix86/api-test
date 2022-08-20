@@ -22,6 +22,6 @@ class Settlements extends Model
 
     public function settlement_type(){
 
-        return hasOne(SettlementType::class, 'settlements_id');
+        return hasOne(SettlementType::class);
     }
 }

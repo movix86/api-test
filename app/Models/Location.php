@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\FederalEntity;
 use App\Models\Settlements;
 use App\Models\Municipality;
+use App\Models\SettlementType;
 
 class Location extends Model
 {
@@ -28,8 +29,9 @@ class Location extends Model
     }
     public function settlements(){
 
-        return $this->hasOne(Settlements::class);
+        return $this->hasOneThrough(SettlementType::class, Settlements::class);
     }
+
     public function municipality(){
 
         return $this->hasOne(Municipality::class);

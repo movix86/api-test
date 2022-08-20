@@ -17,7 +17,7 @@ class CreateFederalEntityTable extends Migration
             $table->id();
             $table->bigInteger('key');
             $table->String('name');
-            $table->String('code');
+            $table->String('code')->nullable();
             $table->foreignId('location_id')->constrained('location')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
