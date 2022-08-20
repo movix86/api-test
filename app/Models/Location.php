@@ -29,6 +29,11 @@ class Location extends Model
     }
     public function settlements(){
 
+        return $this->hasOne(Settlements::class);
+    }
+
+    public function settlements_type(){
+
         return $this->hasOneThrough(SettlementType::class, Settlements::class);
     }
 
