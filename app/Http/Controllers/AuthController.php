@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Location;
+use Illuminate\Support\Facades\DB;
 
 
 class AuthController extends Controller
@@ -87,30 +88,36 @@ class AuthController extends Controller
 
     public function codes($code){
 
-        $code = Location::where('zip_code', $code)->first();
+        // Sentencia SQL de llamada al procedimiento
+        $sql = "CALL respuesta( :param1 )";
+
+        $params = array();
+        $params['param1'] = $code;
+
+        $code = DB::select($sql, $params);
 
         $data =[
-            "zip_code"=> $code["zip_code"],
-            "locality"=> $code["locality"],
+            "zip_code"=> $code[0]->zip_code,
+            "locality"=> $code[0]->locality,
             "federal_entity"=> [
-                "key"=> $code->federal_entity["key"],
-                "name"=> $code->federal_entity["name"],
-                "code"=> $code->federal_entity["code"]
+                "key"=> $code[0]->llave_estado,
+                "name"=> $code[0]->estado_federal,
+                "code"=> $code[0]->code
             ]
             ,
             "settlements"=> [[
-                "key"=> $code->settlements["key"],
-                "name"=> $code->settlements["name"],
-                "zone_type"=> $code->settlements["zone_type"],
+                "key"=> $code[0]->key,
+                "name"=> $code[0]->name,
+                "zone_type"=> $code[0]->zone_type,
                 "settlement_type"=>[
-                    "name"=>$code->settlements_type['zone_type'],
+                    "name"=>$code[0]->nombre_asentamiento,
                 ]
 
             ]]
             ,
             "municipality"=>[
-                "key"=> $code->municipality["key"],
-                "name"=> $code->municipality["name"]
+                "key"=> $code[0]->llave_municipal,
+                "name"=> $code[0]->municipio
             ]
 
         ];
