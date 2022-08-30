@@ -15,8 +15,8 @@ class CreateMunicipalityTable extends Migration
     {
         Schema::create('municipality', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('key');
-            $table->String('name');
+            $table->bigInteger('key')->nullable();
+            $table->String('name')->nullable();
             $table->foreignId('location_id')->constrained('location')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

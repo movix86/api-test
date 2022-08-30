@@ -86,43 +86,43 @@ class AuthController extends Controller
     }
 
 
-    public function codes($code){
+    // public function codes($code){
 
-        // Sentencia SQL de llamada al procedimiento
-        $sql = "CALL respuesta( :param1 )";
+    //     // Sentencia SQL de llamada al procedimiento
+    //     $sql = "CALL respuesta( :param1 )";
 
-        $params = array();
-        $params['param1'] = $code;
+    //     $params = array();
+    //     $params['param1'] = $code;
 
-        $code = DB::select($sql, $params);
+    //     $code = DB::select($sql, $params);
 
-        $data =[
-            "zip_code"=> $code[0]->zip_code,
-            "locality"=> $code[0]->locality,
-            "federal_entity"=> [
-                "key"=> $code[0]->llave_estado,
-                "name"=> $code[0]->estado_federal,
-                "code"=> $code[0]->code
-            ]
-            ,
-            "settlements"=> [[
-                "key"=> $code[0]->key,
-                "name"=> $code[0]->name,
-                "zone_type"=> $code[0]->zone_type,
-                "settlement_type"=>[
-                    "name"=>$code[0]->nombre_asentamiento,
-                ]
+    //     $data =[
+    //         "zip_code"=> $code[0]->zip_code,
+    //         "locality"=> $code[0]->locality,
+    //         "federal_entity"=> [
+    //             "key"=> $code[0]->llave_estado,
+    //             "name"=> $code[0]->estado_federal,
+    //             "code"=> $code[0]->code
+    //         ]
+    //         ,
+    //         "settlements"=> [[
+    //             "key"=> $code[0]->key,
+    //             "name"=> $code[0]->name,
+    //             "zone_type"=> $code[0]->zone_type,
+    //             "settlement_type"=>[
+    //                 "name"=>$code[0]->nombre_asentamiento,
+    //             ]
 
-            ]]
-            ,
-            "municipality"=>[
-                "key"=> $code[0]->llave_municipal,
-                "name"=> $code[0]->municipio
-            ]
+    //         ]]
+    //         ,
+    //         "municipality"=>[
+    //             "key"=> $code[0]->llave_municipal,
+    //             "name"=> $code[0]->municipio
+    //         ]
 
-        ];
-        return response()->json($data);
+    //     ];
+    //     return response()->json($data);
 
-    }
+    // }
 
 }

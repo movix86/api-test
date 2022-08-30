@@ -15,7 +15,7 @@ class CreateSettlementsTypeTable extends Migration
     {
         Schema::create('settlements_type_', function (Blueprint $table) {
             $table->id();
-            $table->String('zone_type');
+            $table->String('zone_type')->nullable();
             $table->foreignId('settlements_id')->constrained('settlements')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

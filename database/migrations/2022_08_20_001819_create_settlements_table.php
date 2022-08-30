@@ -15,9 +15,9 @@ class CreateSettlementsTable extends Migration
     {
         Schema::create('settlements', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('key');
-            $table->String('name');
-            $table->String('zone_type');
+            $table->bigInteger('key')->nullable();
+            $table->String('name')->nullable();
+            $table->String('zone_type')->nullable();
             $table->foreignId('location_id')->constrained('location')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
